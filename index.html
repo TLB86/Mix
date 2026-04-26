@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRO DJ MIX HUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --bg: #0b0e14;
+            --card-bg: #161b22;
+            --text: #e6edf3;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(180deg, #161b22 0%, #0b0e14 100%);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: -1px; }
+        span { color: var(--primary); }
+
+        .search-container {
+            max-width: 800px;
+            margin: -25px auto 30px;
+            padding: 0 20px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 2px solid #30363d;
+            background: var(--card-bg);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        #searchInput:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .mix-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease, border-color 0.3s;
+        }
+
+        .mix-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 180px;
+            background: #21262d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Ikon a kép helyén */
+        .thumbnail::after { content: '🎧'; font-size: 50px; opacity: 0.3; }
+
+        .content { padding: 20px; }
+        .genre { color: var(--primary); font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        h3 { margin: 10px 0; font-size: 1.2rem; }
+        
+        .footer-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Mobil nézet */
+        @media (max-width: 600px) {
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MIX<span>HUB</span> PRO</h1>
+    <p>A legforróbb szettek egy helyen.</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Keress előadóra vagy stílusra...">
+</div>
+
+<div class="container" id="mixGrid">
+    
+    <div class="mix-card">
+        <div class="thumbnail"></div>
+        <div class="content">
+            <div class="genre">Melodic Techno</div>
+            <h3>Sunset Set - DJ Peak</h3>
+            <p>Időtartam: 01:24:00</p>
+            <div class="footer-card">
+                <a href="https://soundcloud.com" target="_blank" class="btn">Hallgatás</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mix-card">
+        <div class="thumbnail"></div>
+        <div class="content">
+            <div class="genre">Deep House</div>
+            <h3>Deep Waters Vol. 4</h3>
+            <p>Időtartam: 58:12</p>
+            <div class="footer-card">
+                <a href="#" class="btn">Hallgatás</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mix-card">
+        <div class="thumbnail"></div>
+        <div class="content">
+            <div class="genre">Tech House</div>
+            <h3>Warehouse Party 2024</h3>
+            <p>Időtartam: 02:05:30</p>
+            <div class="footer-card">
+                <a href="#" class="btn">Hallgatás</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function searchFunction() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.getElementsByClassName('mix-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].querySelector('h3').innerText.toLowerCase();
+            let genre = cards[i].querySelector('.genre').innerText.toLowerCase();
+            if (title.includes(input) || genre.includes(input)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
